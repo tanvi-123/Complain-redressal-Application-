@@ -1,0 +1,60 @@
+<div class="container">
+  <form class="tickets" [formGroup]="form" (ngSubmit)="submit()">
+    <h3 class="label">Enter Ticket Number</h3>
+    <br />
+    <div class="row">
+      <div class="col-6 w-50">
+        <input
+          class="form-control"
+          type="text"
+          name="Ticket Num"
+          placeholder="Enter Ticket Number"
+          formControlName="ticketNumber"
+        /><br />
+      </div>
+      <div class="col-6 w-50">
+        <button class="btn text-center" mat-raised-button type="submit">
+          Search</button
+        ><br />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6 w-50">
+        <div
+          *ngIf="ticketNumber && ticketNumber.invalid && ticketNumber.touched"
+        >
+          <p *ngIf="ticketNumber.hasError('required')">
+            You must have to enter Ticket Number.
+          </p>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- table -->
+<div class="container">
+  <table class="table">
+    <thead style="background-color: #3568a6">
+      <tr>
+        <th scope="col">Description</th>
+        <th scope="col">Date</th>
+        <th scope="col">Assigned Engineer</th>
+        <th scope="col">Engineer Details</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of users">
+        <td>{{ data.description }}</td>
+        <td>{{ data.dateCreated.slice(0, 15) }}</td>
+        <td>{{ data.assignUserId }}</td>
+        <td>
+          <button class="singlebutton" (click)="openDialog(data.assignUserId)">
+            View deatils
+          </button>
+        </td>
+        <td>{{ data.status }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
